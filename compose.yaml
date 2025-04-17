@@ -1,0 +1,13 @@
+services:
+  frontend:
+    image: technical_interview/ssh_server
+    build: ./server
+
+  backend:
+    image: technical_interview/remote_connection
+    build:
+      context: backend
+      dockerfile: ../backend.Dockerfile
+
+  custom:
+    build: ~/custom
