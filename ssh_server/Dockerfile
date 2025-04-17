@@ -1,13 +1,13 @@
 FROM debian:latest
 
-RUN apt update && apt install  openssh-server sudo -y
+ARG USERNAME=test
+ARG USER_UID=1000
+ARG USER_GID=1000
+ARG USER_PWD=secret
 
-RUN useradd -s /bin/bash -g root -G sudo -u 1000 test
+RUN apt-get update && \
+    apt-get install -y openssl
 
-RUN  echo 'test:test' | chpasswd
-
-RUN service ssh start
-
-EXPOSE 22
-
-CMD ["/usr/sbin/sshd","-D"]
+RUN ENCRYPTED_PASS=$(openssl passwd -1 "$USER_PWD") && \
+    groupadd --gid $USER_GID $USERNAME && \
+    useradd --uid $USER_UID --gid $USER_GID -m $USERNAME -p "$ENCRYPTED_PASS"

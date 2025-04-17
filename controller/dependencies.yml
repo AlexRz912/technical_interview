@@ -1,0 +1,11 @@
+- name: nginx
+  hosts: dockerhost
+  vars:
+    image: "{{ postgres_image }}"
+    image_tag: "{{ postgres_version }}"
+    container_name: "{{ postgres_container_name }}"
+    container_env: "{{ postgres_env }}"
+    container_ports: "{{ postgres_ports }}"
+    container_host_group: postgres
+  roles:
+    - container

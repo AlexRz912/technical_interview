@@ -1,13 +1,24 @@
 services:
-  frontend:
-    image: technical_interview/ssh_server
-    build: ./server
-
-  backend:
-    image: technical_interview/remote_connection
+  ssh_server:
     build:
-      context: backend
-      dockerfile: ../backend.Dockerfile
+      context: ./ssh_server
+      dockerfile: Dockerfile
+      args:
+        USERNAME: test
+        USER_UID: 1000
+        USER_GID: 1000
+        USER_PWD: test
+    ports:
+      - "127.0.0.1:22:22"
+    container_name: ssh_server
 
-  custom:
-    build: ~/custom
+  #backend:
+  #  image: technical_interview/remote_connection
+  #  build:
+  #    context: backend
+  #    dockerfile: ../backend.Dockerfile
+#
+  #custom:
+  #  build: ~/custom
+
+
