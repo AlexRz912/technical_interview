@@ -6,8 +6,12 @@ ARG USER_GID=1000
 ARG USER_PWD=secret
 
 RUN apt-get update && \
-    apt-get install -y openssl
+    apt-get install -y openssl openssh-server && \
+    mkdir -p /run/sshd
 
 RUN ENCRYPTED_PASS=$(openssl passwd -1 "$USER_PWD") && \
     groupadd --gid $USER_GID $USERNAME && \
     useradd --uid $USER_UID --gid $USER_GID -m $USERNAME -p "$ENCRYPTED_PASS"
+
+EXPOSE 22
+CMD ["/usr/sbin/sshd", "-D"]
