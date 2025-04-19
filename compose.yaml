@@ -1,5 +1,6 @@
 services:
   ssh_server:
+    hostname: ssh-server
     build:
       context: ./ssh_server
       dockerfile: Dockerfile
@@ -8,6 +9,7 @@ services:
         USER_UID: 1000
         USER_GID: 1000
         USER_PWD: test
+        
     ports:
       - "127.0.0.1:22:22"
     container_name: ssh_server
