@@ -14,6 +14,23 @@ services:
       - "127.0.0.1:22:22"
     container_name: ssh_server
 
+  controller:
+    build:
+      context: ./controller
+      dockerfile: Dockerfile
+    container_name: ansible
+    stdin_open: true
+    tty: true
+      # Comment lancer le controller, sachant que les commandes pour lancer ce container ne sont absolument pas les mêmes?
+
+
+
+
+
+
+
+
+
   #backend:
   #  image: technical_interview/remote_connection
   #  build:
