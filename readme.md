@@ -5,7 +5,7 @@ The instructions given to me were in english. Even tho my primary langage is Fre
 
 These are the versions of the different docker dependencies used.
 
-    ```
+    
     Client: Docker Engine - Community
         Version:           28.0.4
         API version:       1.48
@@ -35,16 +35,16 @@ These are the versions of the different docker dependencies used.
         GitCommit:        de40ad0
 
     Docker Compose version v2.34.0
-    ```
+    
 
 # Instructions to create and connect to the ssh-server
 
 Create an ssh key using ssh-keygen and store it into ssh_server folder with file name "ssh".
-    ```
+    
         mkdir ./ssh_server/ssh && \
         mkdir ./controller/ssh && \
         ssh-keygen -t rsa -b 4096
-    ```
+    
 
 Copy key into controller folder in order to use it.
     `cp -r ssh_server/ssh controller/`
