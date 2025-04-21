@@ -9,7 +9,6 @@ services:
         USER_UID: 1000
         USER_GID: 1000
         USER_PWD: test
-        
     ports:
       - "127.0.0.1:22:22"
     container_name: ssh_server
@@ -18,26 +17,10 @@ services:
     build:
       context: ./controller
       dockerfile: Dockerfile
+    volumes:
+      - ./controller/nginx.yml:/etc/ansible/nginx.yml
+      - ./controller/inventory:/etc/ansible/inventory
+      - ./controller/ssh:/etc/ansible/ssh
     container_name: ansible
     stdin_open: true
     tty: true
-      # Comment lancer le controller, sachant que les commandes pour lancer ce container ne sont absolument pas les mêmes?
-
-
-
-
-
-
-
-
-
-  #backend:
-  #  image: technical_interview/remote_connection
-  #  build:
-  #    context: backend
-  #    dockerfile: ../backend.Dockerfile
-#
-  #custom:
-  #  build: ~/custom
-
-

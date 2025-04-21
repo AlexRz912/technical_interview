@@ -1,0 +1,35 @@
+- name: Install and Configure Nginx
+  hosts: webservers 
+  become: yes
+
+  tasks:
+    - name: Install Nginx package
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+
+    - name: Ensure Nginx is up and running
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Enable firewall for https service
+      ansible.posix.firewalld:
+        service: https
+        state: enabled
+        permanent: true
+        immediate: true
+        offline: true
+
+    - name: Configure Nginx server block
+      template:
+        src: templates/nginx-server.conf.j2
+        dest: /etc/nginx/sites-available/{{ server_name }}
+        notify:
+        - restart nginx
+
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
